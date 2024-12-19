@@ -13,32 +13,15 @@ import java.util.List;
 public class PostService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
     private PostRepository postRepository;
 
 
     public List<Post> getAllPost(){
         return postRepository.findAll();
     }
-    public void savePost(Post post) {
-        Category category;
-        if (post.getCategory().getCatId() == null) {
-            // Category is new, persist it first
-            category = post.getCategory();
-            categoryRepository.save(category);
-        } else {
-            // Try to find the existing category
-            category = categoryRepository.findById(post.getCategory().getCatId())
-                    .orElse(null);
-            if (category == null) {
-                // Category not found, create a new one
-                category = post.getCategory();
-                categoryRepository.save(category);
-            }
-        }
-        post.setCategory(category);
+
+    public void savePost(Post post){
         postRepository.save(post);
     }
+
 }

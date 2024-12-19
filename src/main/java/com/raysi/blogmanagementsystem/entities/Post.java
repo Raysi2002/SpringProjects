@@ -22,26 +22,28 @@ public class Post {
     private String title;
     @Lob
     private String content;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "user_id",
             referencedColumnName = "userId"
     )
     private User user;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "post_tag",
-            joinColumns = @JoinColumn(
-                    name = "post_id",
-                    referencedColumnName = "postId"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "tag_id",
-                    referencedColumnName = "tagId"
-            )
-    )
-    private List<Tag> tags;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(
+//            name = "post_tag",
+//            joinColumns = @JoinColumn(
+//                    name = "post_id",
+//                    referencedColumnName = "postId"
+//            ),
+//            inverseJoinColumns = @JoinColumn(
+//                    name = "tag_id",
+//                    referencedColumnName = "tagId"
+//            )
+//    )
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tag_id", referencedColumnName = "tagId")
+    private Tag tags;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "category_id",
             referencedColumnName = "catId"

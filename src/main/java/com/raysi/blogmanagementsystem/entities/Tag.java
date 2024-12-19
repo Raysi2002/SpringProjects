@@ -16,4 +16,6 @@ public class Tag {
     private Long tagId;
     @Column(unique = true)
     private String name;
+    @Version
+    private Long version;
 }
